@@ -1,4 +1,5 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -58,8 +59,11 @@
     <url>https://github.com/waarp/${project.artifactId}/issues/</url>
   </issueManagement>
   <scm>
-    <connection>scm:git:git://github.com/waarp/${project.artifactId}.git</connection>
-    <developerConnection>scm:git:git@github.com:YourID/${project.artifactId}.git</developerConnection>
+    <connection>scm:git:git://github.com/waarp/${project.artifactId}.git
+    </connection>
+    <developerConnection>
+      scm:git:git@github.com:YourID/${project.artifactId}.git
+    </developerConnection>
     <url>https://github.com/waarp/${project.artifactId}</url>
   </scm>
 
@@ -136,19 +140,36 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <attach-distribution>false</attach-distribution>
-    <waarp.directory.version></waarp.directory.version>
-    <waarp.module.version></waarp.module.version>
 
     <!-- Sonar -->
     <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-    <filtermodule>**</filtermodule>
-    <filterexclude></filterexclude>
     <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
     <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
-    <sonar.sources>src/main</sonar.sources>
-    <sonar.tests>src/test</sonar.tests>
+    <sonar.sources>src/main/java</sonar.sources>
+    <sonar.tests>src/test/java</sonar.tests>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.language>java</sonar.language>
+    <sonar.skipDesign>true</sonar.skipDesign>
+    <jacoco.outputDir>${user.dir}/target/jacoco</jacoco.outputDir>
+    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
+    <!-- Tells Sonar where the Jacoco coverage result file is located for Unit Tests -->
+    <sonar.jacoco.reportPaths>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPaths>
+    <!-- Jacoco output file for ITs -->
+    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
+    <!-- Tells Sonar where the Jacoco coverage result file is located for Integration Tests -->
+    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+    <sonar.exclusions>
+      file:**/target/generated-sources/**,
+      file:**/target/generated-test-sources/**,
+      file:**/target/test-classes/**,
+    </sonar.exclusions>
+    <sonar.surefire.reportsPath>target/surefire-reports</sonar.surefire.reportsPath>
+
+    <!-- Others -->
+    <filtermodule>**</filtermodule>
+    <filterexclude></filterexclude>
+    <waarp.directory.version></waarp.directory.version>
+    <waarp.module.version></waarp.module.version>
 
     <!-- Waarp Versions -->
     <waarp.directory.version>test</waarp.directory.version>
@@ -174,8 +195,6 @@
     <netty.http.version>1.2.0</netty.http.version>
     <slf4j.version>1.7.26</slf4j.version>
     <logback.version>1.2.3</logback.version>
-    <resteasy.client.version>3.6.3.Final</resteasy.client.version>
-    <javax.ws.rs.version>2.1.1</javax.ws.rs.version>
     <guava.version>28.0-jre</guava.version>
     <bouncycastle.version>1.46</bouncycastle.version><!-- 1.62 ? -->
     <commons.compress.version>1.18</commons.compress.version>
@@ -197,6 +216,18 @@
     <jaxen.version>1.1.6</jaxen.version>
     <dom4j.version>1.6.1</dom4j.version>
     <javasysmon.version>0.3.6</javasysmon.version>
+    <beanutils.version>1.8.3</beanutils.version>
+    <gson.version>2.8.5</gson.version>
+    <resteasy.client.version>3.6.3.Final</resteasy.client.version>
+    <javax.ws.rs.version>2.1.1</javax.ws.rs.version>
+    <snmp4j.version>2.6.3</snmp4j.version>
+    <libthrift.version>0.12.0</libthrift.version>
+    <httpclient.version>4.5.9</httpclient.version>
+    <httpcore.version>4.4.11</httpcore.version>
+    <ftp4j.version>1.7.2</ftp4j.version>
+    <joda-time.version>2.10.3</joda-time.version>
+    <jersey-common.version>2.29</jersey-common.version>
+    <jna.version>5.3.1</jna.version>
     <junit.version>4.12</junit.version>
     <javaassist.version>3.25.0-GA</javaassist.version>
     <assertj.version>3.12.2</assertj.version>
@@ -204,15 +235,7 @@
     <rest-assured.version>3.3.0</rest-assured.version>
     <mockito.version>2.28.2</mockito.version>
     <findbugs.version>2.0.1</findbugs.version>
-    <beanutils.version>1.8.3</beanutils.version>
-    <gson.version>2.8.5</gson.version>
-    <snmp4j.version>2.6.3</snmp4j.version>
-    <libthrift.version>0.9.3</libthrift.version>
-    <ftp4j.version>1.7.2</ftp4j.version>
-    <joda-time.version>2.10.3</joda-time.version>
-    <jersey-common.version>2.29</jersey-common.version>
     <test-containers.version>1.11.4</test-containers.version>
-    <jna.version>5.3.1</jna.version>
 
     <!-- Maven plugins -->
     <maven.rpm-maven-plugin.version>2.1.5</maven.rpm-maven-plugin.version>
@@ -230,9 +253,9 @@
     <maven.javadoc.version>3.1.1</maven.javadoc.version><!-- 2.8.1 -->
     <maven.exec.version>1.6.0</maven.exec.version>
     <maven.dependencycheck.version>5.1.0</maven.dependencycheck.version>
-    <!-- Do NOT upgrade -->
     <maven-jxr-plugin.version>3.0.0</maven-jxr-plugin.version><!-- 2.5 3.0.0 -->
-    <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
+    <maven-project-info-reports-plugin.version>3.0.0
+    </maven-project-info-reports-plugin.version>
     <maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
     <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
     <taglist-maven-plugin.version>2.4</taglist-maven-plugin.version>
@@ -241,11 +264,14 @@
     <maven-jar-plugin.version>3.1.2</maven-jar-plugin.version><!-- 2.5 -->
     <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
     <ant-contrib.version>1.0b3</ant-contrib.version>
-    <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version><!-- 1.9 -->
+    <build-helper-maven-plugin.version>3.0.0
+    </build-helper-maven-plugin.version><!-- 1.9 -->
     <license-maven-plugin.version>1.16</license-maven-plugin.version>
-    <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version><!-- 1.3.1 -->
+    <maven-enforcer-plugin.version>3.0.0-M2
+    </maven-enforcer-plugin.version><!-- 1.3.1 -->
     <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
-    <animal-sniffer-maven-plugin.version>1.16</animal-sniffer-maven-plugin.version>
+    <animal-sniffer-maven-plugin.version>1.16
+    </animal-sniffer-maven-plugin.version>
     <ant.version>1.10.6</ant.version><!-- 1.8.2 -->
     <apiviz.version>1.3.4</apiviz.version>
     <maven-shade-plugin>3.2.1</maven-shade-plugin>
@@ -258,14 +284,16 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven.surefire.version}</version>
           <configuration>
-            <argLine>-Xmx2048m</argLine>
+            <!--
+            <argLine>${argLine} -Xmx2048m</argLine>
+            <reuseForks>true</reuseForks>
+            -->
             <runOrder>alphabetical</runOrder>
             <!-- Non Parallel mode -->
             <parallel>classes</parallel>
             <threadCount>1</threadCount>
             <perCoreThreadCount>false</perCoreThreadCount>
             <forkCount>1</forkCount>
-            <reuseForks>true</reuseForks>
             <trimStackTrace>false</trimStackTrace>
             <systemPropertyVariables>
               <logback.configurationFile>
@@ -282,6 +310,12 @@
         <plugin>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${maven.failsafe.version}</version>
+          <!--
+          <configuration>
+            <argLine>${argLine} -Xmx2048m -XX:MaxPermSize=512M
+              ${itCoverageAgent}</argLine>
+          </configuration>
+          -->
           <executions>
             <execution>
               <id>integration-test</id>
@@ -399,20 +433,28 @@
           </configuration>
           <executions>
             <execution>
-              <id>jacoco-prepare-agent</id>
+              <id>default-prepare-agent</id>
               <goals>
                 <goal>prepare-agent</goal>
               </goals>
               <configuration>
-                <propertyName>coverageAgent</propertyName>
+                <append>true</append>
+                <destFile>${sonar.jacoco.reportPaths}</destFile>
+                <output>file</output>
+                <!--<propertyName>surefire.argLine</propertyName>-->
               </configuration>
             </execution>
             <execution>
-              <id>post-unit-test</id>
-              <phase>test</phase>
+              <id>default-prepare-agent-integration</id>
               <goals>
-                <goal>report</goal>
+                <goal>prepare-agent-integration</goal>
               </goals>
+              <configuration>
+                <append>true</append>
+                <destFile>${sonar.jacoco.itReportPath}</destFile>
+                <output>file</output>
+                <!--<propertyName>failsafe.argLine</propertyName>-->
+              </configuration>
             </execution>
             <execution>
               <id>report-aggregate</id>
@@ -429,7 +471,7 @@
               </goals>
               <configuration>
                 <!-- Specific configuration for the non aggregate report -->
-                <skip>true</skip>
+                <!--<skip>true</skip>-->
               </configuration>
             </execution>
           </executions>
@@ -439,6 +481,14 @@
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>${sonar-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>sonar</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
 
         <plugin>
@@ -447,7 +497,9 @@
           <groupId>org.vafer</groupId>
           <version>1.5</version>
           <configuration>
-            <deb>${project.build.directory}/waarp-${project.name}-${project.version}.deb</deb>
+            <deb>
+              ${project.build.directory}/waarp-${project.name}-${project.version}.deb
+            </deb>
             <snapshotExpand>true</snapshotExpand>
             <skip>true</skip>
             <controlDir>${project.build.directory}/control</controlDir>
@@ -455,7 +507,8 @@
 
               <!-- Artifacts -->
               <data>
-                <src>${project.build.directory}/${project.build.finalName}.jar</src>
+                <src>${project.build.directory}/${project.build.finalName}.jar
+                </src>
                 <type>file</type>
               </data>
 
@@ -467,7 +520,9 @@
 
               <!-- Conf & other -->
               <data>
-                <src>${project.build.directory}/systemd/waarp-${project.name}.service</src>
+                <src>
+                  ${project.build.directory}/systemd/waarp-${project.name}.service
+                </src>
                 <type>file</type>
                 <mapper>
                   <type>perm</type>
@@ -538,24 +593,33 @@
               </goals>
               <configuration>
                 <minimizeJar>true</minimizeJar>
-                <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
+                <promoteTransitiveDependencies>true
+                </promoteTransitiveDependencies>
                 <createDependencyReducedPom>true</createDependencyReducedPom>
-                <keepDependenciesWithProvidedScope>true</keepDependenciesWithProvidedScope>
+                <keepDependenciesWithProvidedScope>true
+                </keepDependenciesWithProvidedScope>
                 <shadedArtifactAttached>true</shadedArtifactAttached>
-                <shadedClassifierName>jar-with-dependencies</shadedClassifierName>
+                <shadedClassifierName>jar-with-dependencies
+                </shadedClassifierName>
                 <useBaseVersion>true</useBaseVersion>
                 <transformers>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+                  <transformer
+                    implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
+                  <transformer
+                    implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
                     <addHeader>false</addHeader>
                   </transformer>
                   <transformer
                     implementation="org.apache.maven.plugins.shade.resource.ResourceBundleAppendingTransformer"/>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <transformer
+                    implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                  <transformer
+                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                     <manifestEntries>
-                      <X-Compile-Source-JDK>${java.version}</X-Compile-Source-JDK>
-                      <X-Compile-Target-JDK>${java.version}</X-Compile-Target-JDK>
+                      <X-Compile-Source-JDK>${java.version}
+                      </X-Compile-Source-JDK>
+                      <X-Compile-Target-JDK>${java.version}
+                      </X-Compile-Target-JDK>
                     </manifestEntries>
                   </transformer>
                 </transformers>
@@ -601,7 +665,9 @@
         <version>${versions-maven-plugin.version}</version>
         <inherited>false</inherited>
         <configuration>
-          <rulesUri>file:///${session.executionRootDirectory}/maven-version-rules.xml</rulesUri>
+          <rulesUri>
+            file:///${session.executionRootDirectory}/maven-version-rules.xml
+          </rulesUri>
         </configuration>
       </plugin>
       <plugin>
@@ -780,12 +846,14 @@
               <target>
                 <mkdir dir="${project.build.directory}"/>
                 <mkdir dir="${project.build.directory}/classes"/>
-                <echo message="${project.version}" file="${project.build.directory}/version.txt"/>
+                <echo message="${project.version}"
+                      file="${project.build.directory}/version.txt"/>
                 <echo message="${project.artifactId}"/>
                 <taskdef resource="net/sf/antcontrib/antlib.xml"/>
                 <mkdir dir="${project.build.directory}/site"/>
                 <if>
-                  <available file="${project.basedir}/src/main/resources" type="dir"/>
+                  <available file="${project.basedir}/src/main/resources"
+                             type="dir"/>
                   <then>
                     <copy toDir="${project.build.directory}/">
                       <fileset dir="${project.basedir}/src/main/resources/"/>
@@ -796,8 +864,10 @@
                   <or>
                     <equals arg1="${project.artifactId}" arg2="WaarpFtp"/>
                     <equals arg1="${project.artifactId}" arg2="WaarpFtp-Core"/>
-                    <equals arg1="${project.artifactId}" arg2="WaarpFtp-Filesystem"/>
-                    <equals arg1="${project.artifactId}" arg2="WaarpFtp-Simpleimpl"/>
+                    <equals arg1="${project.artifactId}"
+                            arg2="WaarpFtp-Filesystem"/>
+                    <equals arg1="${project.artifactId}"
+                            arg2="WaarpFtp-Simpleimpl"/>
                   </or>
                   <then>
                     <if>
@@ -808,14 +878,19 @@
                           file="${project.basedir}/core/src/main/java/${waarp.module.version}/Version.java"/>
                         <mkdir dir="${project.build.directory}/site"/>
                         <mkdir dir="${project.build.directory}/site/core"/>
-                        <mkdir dir="${project.build.directory}/site/filesystem"/>
-                        <mkdir dir="${project.build.directory}/site/simpleimpl"/>
-                        <copy file="${project.basedir}/src/site/resources/html/core/index.html"
-                              toDir="${project.build.directory}/site/core/"/>
-                        <copy file="${project.basedir}/src/site/resources/html/filesystem/index.html"
-                              toDir="${project.build.directory}/site/filesystem/"/>
-                        <copy file="${project.basedir}/src/site/resources/html/simpleimpl/index.html"
-                              toDir="${project.build.directory}/site/simpleimpl/"/>
+                        <mkdir
+                          dir="${project.build.directory}/site/filesystem"/>
+                        <mkdir
+                          dir="${project.build.directory}/site/simpleimpl"/>
+                        <copy
+                          file="${project.basedir}/src/site/resources/html/core/index.html"
+                          toDir="${project.build.directory}/site/core/"/>
+                        <copy
+                          file="${project.basedir}/src/site/resources/html/filesystem/index.html"
+                          toDir="${project.build.directory}/site/filesystem/"/>
+                        <copy
+                          file="${project.basedir}/src/site/resources/html/simpleimpl/index.html"
+                          toDir="${project.build.directory}/site/simpleimpl/"/>
                       </then>
                     </if>
                   </then>
@@ -854,44 +929,58 @@
                     <!-- copy if exists resources into tmp resources (empty before) then add to zip -->
                     <mkdir dir="${basedir}/target/resources"/>
                     <if>
-                      <available file="${project.basedir}/src/main/resources" type="dir"/>
+                      <available file="${project.basedir}/src/main/resources"
+                                 type="dir"/>
                       <then>
                         <copy toDir="${basedir}/target/resources/">
-                          <fileset dir="${project.basedir}/src/main/resources/"/>
+                          <fileset
+                            dir="${project.basedir}/src/main/resources/"/>
                         </copy>
                       </then>
                     </if>
-                    <move file="${project.build.directory}/${project.build.finalName}.jar"
-                          tofile="${project.build.directory}/${project.build.finalName}.orig.jar"/>
-                    <zip destfile="${project.build.directory}/${project.build.finalName}.jar" whenempty="skip">
+                    <move
+                      file="${project.build.directory}/${project.build.finalName}.jar"
+                      tofile="${project.build.directory}/${project.build.finalName}.orig.jar"/>
+                    <zip
+                      destfile="${project.build.directory}/${project.build.finalName}.jar"
+                      whenempty="skip">
                       <zipfileset dir="${basedir}" prefix="META-INF/">
                         <include name="LICENSE.*"/>
                         <include name="NOTICE.*"/>
                         <include name="COPYRIGHT.*"/>
                       </zipfileset>
-                      <zipfileset dir="${basedir}/license" prefix="META-INF/license/">
+                      <zipfileset dir="${basedir}/license"
+                                  prefix="META-INF/license/">
                         <exclude name="**/.*/**"/>
                         <include name="**"/>
                       </zipfileset>
-                      <zipfileset dir="${basedir}/target/resources" prefix="./" erroronmissingarchive="false"/>
-                      <zipfileset filemode="644" src="${project.build.directory}/${project.build.finalName}.orig.jar"
+                      <zipfileset dir="${basedir}/target/resources" prefix="./"
+                                  erroronmissingarchive="false"/>
+                      <zipfileset filemode="644"
+                                  src="${project.build.directory}/${project.build.finalName}.orig.jar"
                                   dirmode="755">
                       </zipfileset>
                     </zip>
-                    <delete file="${project.build.directory}/${project.build.finalName}.orig.jar"/>
-                    <move file="${project.build.directory}/${project.build.finalName}-sources.jar"
-                          tofile="${project.build.directory}/${project.build.finalName}-sources.orig.jar"/>
-                    <zip destfile="${project.build.directory}/${project.build.finalName}-sources.jar" whenempty="skip">
+                    <delete
+                      file="${project.build.directory}/${project.build.finalName}.orig.jar"/>
+                    <move
+                      file="${project.build.directory}/${project.build.finalName}-sources.jar"
+                      tofile="${project.build.directory}/${project.build.finalName}-sources.orig.jar"/>
+                    <zip
+                      destfile="${project.build.directory}/${project.build.finalName}-sources.jar"
+                      whenempty="skip">
                       <zipfileset dir="${basedir}" prefix="META-INF/">
                         <include name="LICENSE.*"/>
                         <include name="NOTICE.*"/>
                         <include name="COPYRIGHT.*"/>
                       </zipfileset>
-                      <zipfileset dir="${basedir}/license" prefix="META-INF/license/">
+                      <zipfileset dir="${basedir}/license"
+                                  prefix="META-INF/license/">
                         <exclude name="**/.*/**"/>
                         <include name="**"/>
                       </zipfileset>
-                      <zipfileset dir="${basedir}/target/resources" prefix="./" erroronmissingarchive="false"/>
+                      <zipfileset dir="${basedir}/target/resources" prefix="./"
+                                  erroronmissingarchive="false"/>
                       <zipfileset filemode="644"
                                   src="${project.build.directory}/${project.build.finalName}-sources.orig.jar"
                                   dirmode="755">
@@ -899,7 +988,8 @@
                         <include name="**/${filtermodule}/**"/>
                       </zipfileset>
                     </zip>
-                    <delete file="${project.build.directory}/${project.build.finalName}-sources.orig.jar"/>
+                    <delete
+                      file="${project.build.directory}/${project.build.finalName}-sources.orig.jar"/>
                   </then>
                 </if>
               </target>
@@ -977,7 +1067,8 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>${maven-project-info-reports-plugin.version}</version><!-- 2.7 -->
+        <version>${maven-project-info-reports-plugin.version}
+        </version><!-- 2.7 -->
         <configuration>
           <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
         </configuration>
@@ -1127,7 +1218,8 @@
               <attach>false</attach>
               <useStandardDocletOptions>true</useStandardDocletOptions>
               <outputDirectory>${project.build.directory}/api</outputDirectory>
-              <reportOutputDirectory>${project.build.directory}/api</reportOutputDirectory>
+              <reportOutputDirectory>${project.build.directory}/api
+              </reportOutputDirectory>
               <destDir>api</destDir>
               <charset>UTF-8</charset>
               <docencoding>UTF-8</docencoding>
@@ -1136,8 +1228,10 @@
               <author>true</author>
               <keywords>true</keywords>
               <overview>${basedir}/src/javadoc/overview.html</overview>
-              <doctitle>${project.name} ${project.version} API Reference</doctitle>
-              <windowtitle>${project.name} ${project.version} API Reference</windowtitle>
+              <doctitle>${project.name} ${project.version} API Reference
+              </doctitle>
+              <windowtitle>${project.name} ${project.version} API Reference
+              </windowtitle>
               <additionalOptions>
                 -sourceclasspath ${project.build.outputDirectory}
               </additionalOptions>
@@ -1489,6 +1583,16 @@
         <version>${libthrift.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpclient.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+        <version>${httpcore.version}</version>
+      </dependency>
+      <dependency>
         <groupId>it.sauronsoftware</groupId>
         <artifactId>ftp4j</artifactId>
         <version>${ftp4j.version}</version>
@@ -1574,7 +1678,6 @@
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
         <version>${logback.version}</version>
-        <!--<scope>provided</scope> -->
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
