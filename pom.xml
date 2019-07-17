@@ -236,6 +236,7 @@
     <mockito.version>2.28.2</mockito.version>
     <findbugs.version>2.0.1</findbugs.version>
     <test-containers.version>1.11.4</test-containers.version>
+    <apache.ant.version>1.10.6</apache.ant.version>
 
     <!-- Maven plugins -->
     <maven.rpm-maven-plugin.version>2.1.5</maven.rpm-maven-plugin.version>
@@ -1802,6 +1803,12 @@
         <groupId>net.java.dev.jna</groupId>
         <artifactId>jna</artifactId>
         <version>${jna.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.ant</groupId>
+        <artifactId>ant</artifactId>
+        <version>${apache.ant.version}</version>
         <scope>test</scope>
       </dependency>
 
